@@ -33,7 +33,7 @@ class AddPegawaiController extends GetxController {
           });
         }
       } on FirebaseAuthException catch (e) {
-        String errMessage = "Error login!";
+        String errMessage = "Error add pegawai!";
         if (e.code == 'weak-password') {
           errMessage = "Password yang digunakan terlalu singkat!";
         } else if (e.code == 'email-already-in-use') {
