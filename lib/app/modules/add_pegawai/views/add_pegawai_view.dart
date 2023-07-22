@@ -17,6 +17,7 @@ class AddPegawaiView extends GetView<AddPegawaiController> {
         padding: const EdgeInsets.all(20),
         children: [
           TextField(
+            autocorrect: false,
             controller: controller.nipC,
             decoration: const InputDecoration(
               labelText: "NIP",
@@ -25,6 +26,7 @@ class AddPegawaiView extends GetView<AddPegawaiController> {
           ),
           const SizedBox(height: 20),
           TextField(
+            autocorrect: false,
             controller: controller.nameC,
             decoration: const InputDecoration(
               labelText: "Name",
@@ -33,6 +35,7 @@ class AddPegawaiView extends GetView<AddPegawaiController> {
           ),
           const SizedBox(height: 20),
           TextField(
+            autocorrect: false,
             controller: controller.emailC,
             decoration: const InputDecoration(
               labelText: "Email",
