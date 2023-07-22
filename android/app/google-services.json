@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "420005456471",
+    "project_id": "flutter-presence-f47e3",
+    "storage_bucket": "flutter-presence-f47e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420005456471:android:a2d86a4fab0752d87a1112",
+        "android_client_info": {
+          "package_name": "com.tadin.presence"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420005456471-0i4u18jom1gj534l18f3g0v29dohe7ub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8HykDNjeJvcXElA67DwRQRQwv0MoU4Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420005456471-0i4u18jom1gj534l18f3g0v29dohe7ub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
