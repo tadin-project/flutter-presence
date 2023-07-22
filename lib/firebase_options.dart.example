@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA8HykDNjeJvcXElA67DwRQRQwv0MoU4Uk',
-    appId: '1:420005456471:android:a2d86a4fab0752d87a1112',
-    messagingSenderId: '420005456471',
-    projectId: 'flutter-presence-f47e3',
-    storageBucket: 'flutter-presence-f47e3.appspot.com',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDDTWI2j7yMP1Jd3aA_U83nPeq632AA1Ls',
-    appId: '1:420005456471:ios:2bffe3ac1b8790e47a1112',
-    messagingSenderId: '420005456471',
-    projectId: 'flutter-presence-f47e3',
-    storageBucket: 'flutter-presence-f47e3.appspot.com',
-    iosClientId: '420005456471-3tqombv3kildvrqqai8n3jlo8dge6s0m.apps.googleusercontent.com',
-    iosBundleId: 'com.tadin.presence',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
+    iosClientId: '',
+    iosBundleId: '',
   );
 }
