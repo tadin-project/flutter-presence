@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddPegawaiController extends GetxController {
+  RxBool isLoading = false.obs;
+  RxBool isLoadingAddPegawai = false.obs;
   TextEditingController nameC = TextEditingController();
   TextEditingController nipC = TextEditingController();
   TextEditingController emailC = TextEditingController();
@@ -14,6 +16,7 @@ class AddPegawaiController extends GetxController {
 
   Future<void> prosesAddPegawai() async {
     if (passAdminC.text.isNotEmpty) {
+      isLoadingAddPegawai.value = true;
       try {
         String emailAdmin = auth.currentUser!.email!;
         // ignore: unused_local_variable
@@ -48,6 +51,8 @@ class AddPegawaiController extends GetxController {
             password: passAdminC.text,
           );
 
+          isLoadingAddPegawai.value = false;
+
           Get.back(); // tutup dialog
           Get.back(); // back to home
           Get.snackbar(
@@ -55,7 +60,9 @@ class AddPegawaiController extends GetxController {
             "Berhasil menambahkan pegawai",
           ); // back to home
         }
+        isLoadingAddPegawai.value = false;
       } on FirebaseAuthException catch (e) {
+        isLoadingAddPegawai.value = false;
         String errMessage = "Error add pegawai!";
         if (e.code == 'weak-password') {
           errMessage = "Password yang digunakan terlalu singkat!";
@@ -68,9 +75,11 @@ class AddPegawaiController extends GetxController {
         }
         Get.snackbar("Terjadi Kesalahan", errMessage);
       } catch (e) {
+        isLoadingAddPegawai.value = false;
         Get.snackbar("Terjadi Kesalahan", "Tidak dapat menambahkan pegawai!");
       }
     } else {
+      isLoading.value = false;
       Get.snackbar(
         "Terjadi Kesalahan",
         "Password wajib diisi untuk keperluan validasi admin!",
@@ -78,7 +87,8 @@ class AddPegawaiController extends GetxController {
     }
   }
 
-  void addPegawai() async {
+  Future<void> addPegawai() async {
+    isLoading.value = true;
     if (nameC.text.isNotEmpty &&
         nipC.text.isNotEmpty &&
         emailC.text.isNotEmpty) {
@@ -87,6 +97,9 @@ class AddPegawaiController extends GetxController {
         content: Column(
           children: [
             const Text("Masukkan password untuk validasi admin"),
+            const SizedBox(
+              height: 10,
+            ),
             TextField(
               controller: passAdminC,
               obscureText: true,
@@ -99,14 +112,24 @@ class AddPegawaiController extends GetxController {
         ),
         actions: [
           OutlinedButton(
-            onPressed: () => Get.back(),
+            onPressed: () {
+              isLoading.value = false;
+              Get.back();
+            },
             child: const Text("CANCEL"),
           ),
-          ElevatedButton(
-            onPressed: () async {
-              await prosesAddPegawai();
-            },
-            child: const Text("ADD PEGAWAI"),
+          Obx(
+            () => ElevatedButton(
+              onPressed: () async {
+                if (isLoadingAddPegawai.isFalse) {
+                  await prosesAddPegawai();
+                }
+                isLoading.value = false;
+              },
+              child: Text(
+                isLoadingAddPegawai.isFalse ? "ADD PEGAWAI" : "LOADING...",
+              ),
+            ),
           ),
         ],
       );

@@ -27,12 +27,20 @@ class HomeView extends GetView<HomeController> {
             style: TextStyle(fontSize: 20),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            await FirebaseAuth.instance.signOut();
-            Get.toNamed(Routes.LOGIN);
-          },
-          child: const Icon(Icons.logout),
+        floatingActionButton: Obx(
+          () => FloatingActionButton(
+            onPressed: () async {
+              if (controller.isLoading.isFalse) {
+                controller.isLoading.value = true;
+                await FirebaseAuth.instance.signOut();
+                controller.isLoading.value = false;
+                Get.toNamed(Routes.LOGIN);
+              }
+            },
+            child: controller.isLoading.isFalse
+                ? const Icon(Icons.logout)
+                : const CircularProgressIndicator(),
+          ),
         ));
   }
 }
