@@ -11,8 +11,8 @@ class LoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> login() async {
-    isLoading.value = true;
     if (emailC.text.isNotEmpty && passC.text.isNotEmpty) {
+      isLoading.value = true;
       try {
         UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: emailC.text,
