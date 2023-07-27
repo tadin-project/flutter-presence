@@ -34,7 +34,7 @@ class HomeView extends GetView<HomeController> {
                 controller.isLoading.value = true;
                 await FirebaseAuth.instance.signOut();
                 controller.isLoading.value = false;
-                Get.toNamed(Routes.LOGIN);
+                Get.offAndToNamed(Routes.LOGIN);
               }
             },
             child: controller.isLoading.isFalse

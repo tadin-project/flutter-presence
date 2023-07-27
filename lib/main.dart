@@ -20,7 +20,6 @@ void main() async {
             home: Scaffold(body: Center(child: CircularProgressIndicator())),
           );
         }
-        print(snapshot.data);
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: "Application",
