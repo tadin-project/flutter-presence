@@ -9,6 +9,7 @@ import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +28,9 @@ class ProfileView extends GetView<ProfileController> {
 
             if (snapshot.hasData) {
               Map<String, dynamic> user = snapshot.data!.data()!;
+              String defaultImg =
+                  "https://ui-avatars.com/api/?name=${user["name"]}";
+
               return ListView(
                 padding: const EdgeInsets.all(20),
                 children: [
@@ -38,12 +42,16 @@ class ProfileView extends GetView<ProfileController> {
                           width: 100,
                           height: 100,
                           child: CachedNetworkImage(
-                            imageUrl:
-                                "https://ui-avatars.com/api/?name=${user["name"]}",
+                            imageUrl: user["profile"] != null
+                                ? user["profile"] != ""
+                                    ? user["profile"]
+                                    : defaultImg
+                                : defaultImg,
                             placeholder: (context, url) =>
                                 const CircularProgressIndicator(),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

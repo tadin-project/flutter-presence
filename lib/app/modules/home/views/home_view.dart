@@ -13,7 +13,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('HomeView'),
+          title: const Text('Home'),
           centerTitle: true,
           actions: [
             IconButton(
@@ -42,7 +42,7 @@ class HomeView extends GetView<HomeController> {
         ),
         body: const Center(
           child: Text(
-            'HomeView is working',
+            'Ini home',
             style: TextStyle(fontSize: 20),
           ),
         ),
