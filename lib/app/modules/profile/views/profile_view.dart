@@ -41,9 +41,9 @@ class ProfileView extends GetView<ProfileController> {
                             imageUrl:
                                 "https://ui-avatars.com/api/?name=${user["name"]}",
                             placeholder: (context, url) =>
-                                new CircularProgressIndicator(),
+                                const CircularProgressIndicator(),
                             errorWidget: (context, url, error) =>
-                                new Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),
