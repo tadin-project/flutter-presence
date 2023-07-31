@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:presence/app/routes/app_pages.dart';
 
 import '../controllers/profile_controller.dart';
 
@@ -66,18 +67,21 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   const SizedBox(height: 20),
                   ListTile(
-                    onTap: () {},
+                    onTap: () => Get.toNamed(
+                      Routes.UPDATE_PROFILE,
+                      arguments: user,
+                    ),
                     leading: const Icon(Icons.person),
                     title: const Text("Update Profile"),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () => Get.toNamed(Routes.UPDATE_PASSWORD),
                     leading: const Icon(Icons.vpn_key),
                     title: const Text("Ganti Password"),
                   ),
                   if (user["role"] == "admin")
                     ListTile(
-                      onTap: () {},
+                      onTap: () => Get.toNamed(Routes.ADD_PEGAWAI),
                       leading: const Icon(Icons.person_add),
                       title: const Text("Add Pegawai"),
                     ),
