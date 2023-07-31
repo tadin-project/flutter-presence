@@ -29,9 +29,13 @@ class UpdatePasswordController extends GetxController {
           Get.back();
           Get.snackbar("Berhasil", "Berhasil ganti password");
         } on FirebaseAuthException catch (e) {
-          String errorMessage = "Tidak dapat update password!";
+          String errorMessage = "";
           if (e.code == "wrong-password") {
             errorMessage = "Password lama salah!";
+          } else if (e.code == "weak-password") {
+            errorMessage = "Pasword minimal 6 karakter!";
+          } else {
+            errorMessage = "Tidak dapat update password. Error kode ${e.code}!";
           }
 
           Get.snackbar("Terjadi Kesalahan", errorMessage);

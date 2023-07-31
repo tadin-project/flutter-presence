@@ -55,7 +55,7 @@ class UpdateProfileView extends GetView<UpdateProfileController> {
             () => ElevatedButton(
               onPressed: () async {
                 if (controller.isLoading.isFalse) {
-                  await controller.updateProfile(user["nip"]);
+                  await controller.updateProfile(user["uid"]);
                 }
               },
               child: Text(
