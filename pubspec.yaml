@@ -2,10 +2,10 @@ name: presence
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment:
-  sdk: ">=3.0.5 <4.0.0"
+environment: 
+  sdk: '>=3.0.5 <4.0.0'
 
-dependencies:
+dependencies: 
   cupertino_icons: ^1.0.2
   get: 4.6.5
   firebase_core: 2.15.0
@@ -14,13 +14,15 @@ dependencies:
   firebase_storage: 11.2.5
   cached_network_image: ^3.2.3
   image_picker: 1.0.1
-  flutter:
+  convex_bottom_bar: 3.2.0
+  flutter: 
     sdk: flutter
 
-dev_dependencies:
+dev_dependencies: 
   flutter_lints: ^2.0.0
-  flutter_test:
+  flutter_test: 
     sdk: flutter
 
-flutter:
+flutter: 
   uses-material-design: true
+

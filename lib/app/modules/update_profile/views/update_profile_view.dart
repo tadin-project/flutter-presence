@@ -94,7 +94,7 @@ class UpdateProfileView extends GetView<UpdateProfileController> {
                             onPressed: () {
                               controller.deleteProfile(user["uid"]);
                             },
-                            child: const Text("choose"),
+                            child: const Text("delete"),
                           ),
                         ],
                       );
