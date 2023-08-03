@@ -111,7 +111,7 @@ class ProfileView extends GetView<ProfileController> {
           }),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.fixedCircle,
-        items: [
+        items: const [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.fingerprint, title: 'Add'),
           TabItem(icon: Icons.people, title: 'Profile'),
