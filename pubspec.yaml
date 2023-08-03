@@ -15,6 +15,7 @@ dependencies:
   cached_network_image: ^3.2.3
   image_picker: 1.0.1
   convex_bottom_bar: 3.2.0
+  intl: 0.18.1
   flutter: 
     sdk: flutter
 

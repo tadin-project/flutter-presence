@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:intl/intl.dart';
 
 import 'package:get/get.dart';
 import 'package:presence/app/routes/app_pages.dart';
@@ -12,6 +13,9 @@ class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // DateTime now = DateTime.now();
+    // String dateNow = DateFormat.yMMMEd().format(now);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -23,11 +27,167 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text(
-          'Ini home',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          Row(
+            children: [
+              ClipOval(
+                child: Container(
+                  height: 75,
+                  width: 75,
+                  color: Colors.grey[200],
+                  child: Center(
+                    child: Text("X"),
+                  ),
+                  // child: Image.network(src),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome, ",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text("Jl jalan"),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Developer",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  "123456",
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "Tadin",
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Text("Masuk"),
+                    Text("-"),
+                  ],
+                ),
+                Container(
+                  width: 2,
+                  height: 40,
+                  color: Colors.grey,
+                ),
+                Column(
+                  children: [
+                    Text("Keluar"),
+                    Text("-"),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Divider(
+            color: Colors.grey[300],
+            thickness: 2,
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Last 5 days",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("See more"),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[200],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Masuk",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          DateFormat.yMMMEd().format(DateTime.now()),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Text(DateFormat.jms().format(DateTime.now())),
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Keluar",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(DateFormat.jms().format(DateTime.now())),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.fixedCircle,

@@ -9,6 +9,7 @@ class AddPegawaiController extends GetxController {
   TextEditingController nameC = TextEditingController();
   TextEditingController nipC = TextEditingController();
   TextEditingController emailC = TextEditingController();
+  TextEditingController jobC = TextEditingController();
   TextEditingController passAdminC = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -41,6 +42,7 @@ class AddPegawaiController extends GetxController {
             "uid": uid,
             "role": "pegawai",
             "createdAt": DateTime.now().toIso8601String(),
+            "job": jobC.text,
           });
 
           await userCredentialPegawai.user!.sendEmailVerification();
@@ -92,6 +94,7 @@ class AddPegawaiController extends GetxController {
     isLoading.value = true;
     if (nameC.text.isNotEmpty &&
         nipC.text.isNotEmpty &&
+        jobC.text.isNotEmpty &&
         emailC.text.isNotEmpty) {
       Get.defaultDialog(
         title: "Validasi Admin",
@@ -135,7 +138,10 @@ class AddPegawaiController extends GetxController {
         ],
       );
     } else {
-      Get.snackbar("Terjadi Kesalahan", "NIP, nama, dan email harus diisi!");
+      Get.snackbar(
+        "Terjadi Kesalahan",
+        "NIP, nama, email, dan job harus diisi!",
+      );
     }
   }
 }
