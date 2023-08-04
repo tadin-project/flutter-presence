@@ -22,7 +22,13 @@ class PageIndexController extends GetxController {
           String address =
               "${placemarks[0].name}, ${placemarks[0].subLocality}, ${placemarks[0].locality}";
           await updatePosition(position, address);
-          await presensi(position, address);
+
+          // cek distance between 2 position
+          double distance = Geolocator.distanceBetween(
+              -6.340033, 106.7914093, position.latitude, position.longitude);
+
+          // presensi
+          await presensi(position, address, distance);
 
           Get.snackbar(
             "Berhasil",
@@ -42,7 +48,8 @@ class PageIndexController extends GetxController {
     }
   }
 
-  Future<void> presensi(Position position, String address) async {
+  Future<void> presensi(
+      Position position, String address, double distance) async {
     String uid = auth.currentUser!.uid;
     CollectionReference<Map<String, dynamic>> colPresence =
         store.collection("pegawai").doc(uid).collection("presence");
@@ -50,6 +57,11 @@ class PageIndexController extends GetxController {
 
     DateTime now = DateTime.now();
     String todayDocID = DateFormat.yMd().format(now).replaceAll("/", "-");
+    String status = "Di luar area";
+    if (distance <= 200) {
+      // di dalam area
+      status = "Di dalam area";
+    }
 
     if (snapPresence.docs.isEmpty) {
       // belum pernah absen
@@ -60,10 +72,45 @@ class PageIndexController extends GetxController {
           "lat": position.latitude,
           "long": position.longitude,
           "address": address,
-          "status": "Di dalam area",
+          "status": status,
         }
       });
-    } else {}
+    } else {
+      DocumentSnapshot<Map<String, dynamic>> todayDoc =
+          await colPresence.doc(todayDocID).get();
+
+      if (todayDoc.exists) {
+        // absen keluar atau sudah absen masuk dan keluar
+        Map<String, dynamic>? dataPresenceToday = todayDoc.data();
+        if (dataPresenceToday?["keluar"] != null) {
+          // sudah absen masuk dan keluar
+          Get.snackbar("Sukses", "Kamu sudah absen masuk dan keluar hari ini");
+        } else {
+          // absen keluar
+          await colPresence.doc(todayDocID).update({
+            "keluar": {
+              "date": now.toIso8601String(),
+              "lat": position.latitude,
+              "long": position.longitude,
+              "address": address,
+              "status": status,
+            }
+          });
+        }
+      } else {
+        // absen masuk
+        await colPresence.doc(todayDocID).set({
+          "date": now.toIso8601String(),
+          "masuk": {
+            "date": now.toIso8601String(),
+            "lat": position.latitude,
+            "long": position.longitude,
+            "address": address,
+            "status": status,
+          }
+        });
+      }
+    }
   }
 
   Future<void> updatePosition(Position position, String address) async {
