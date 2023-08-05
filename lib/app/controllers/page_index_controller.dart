@@ -26,7 +26,7 @@ class PageIndexController extends GetxController {
 
           // cek distance between 2 position
           double distance = Geolocator.distanceBetween(
-              -6.340033, 106.7914093, position.latitude, position.longitude);
+              -7.33831, 112.7237836, position.latitude, position.longitude);
 
           // presensi
           await presensi(position, address, distance);
@@ -225,7 +225,9 @@ class PageIndexController extends GetxController {
       // );
     }
 
-    Position position = await Geolocator.getCurrentPosition();
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
     return {
       "position": position,
       "message": "Berhasil mendapatkan posisi device.",
